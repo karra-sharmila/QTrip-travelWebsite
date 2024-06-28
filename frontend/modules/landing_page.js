@@ -33,7 +33,7 @@ function addCityToDOM(id, city, description, image) {
   // 1. Populate the City details and insert those details into the DOM
   const cardContent = document.getElementById("data");
   let card = document.createElement("div");
-  let url = "/frontend/pages/adventures/?city=" + id;
+  let url = "/pages/adventures/?city=" + id;
   card.className = "col-lg-3 col-6 mb-4";
   card.innerHTML = `
                 <a href="${url}" id="${id}">
