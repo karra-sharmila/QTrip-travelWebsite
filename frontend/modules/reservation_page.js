@@ -39,7 +39,7 @@ if(reservations.length){
     };
     const formattedDate = bookingTime.toLocaleString("en-IN", options).replace(" at", ",");
     const tRow = document.createElement("tr");
-    const advUrl = "/frontend/pages/adventures/detail/?adventure=" + element.adventure ;
+    const advUrl = "/pages/adventures/detail/?adventure=" + element.adventure ;
     tRow.innerHTML = `
                         <td scope="col">${element.id}</td>
                         <td scope="col">${element.name}</td>
