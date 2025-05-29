@@ -62,25 +62,6 @@ app.get("/adventures", (req, res) => {
     });
 });
 
-/*
-[GET API] used in module 3 to fetch details for a given adventure
-The response is an [array] of adventures with each having the following structure :
- {
-    "id": "2447910730",
-    "name": "Niaboytown",
-    "subtitle": "This is a mind-blowing adventure!",
-    "images": [
-    "https://images.pexels.com/photos/66997/pexels-photo-66997.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-    "https://images.pexels.com/photos/837745/pexels-photo-837745.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-    "https://images.pexels.com/photos/1624438/pexels-photo-1624438.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
-    ],
-    "content": "Random content",
-    "available": false,
-    "reserved": true,
-    "costPerHead": 4003
- }
-Data is sourced from "adventures" array in db.json file
-*/
 app.get("/adventures/detail", (req, res) => {
   const data = db.get("detail").value();
   let response = data.find((item) => item.id == req.query.adventure);
@@ -91,11 +72,6 @@ app.get("/adventures/detail", (req, res) => {
     });
 });
 
-/*
-[GET] API used in module 3 to make a new reservation
-Expects serialized form data in the format name=Roy&date=2020-10-08&person=2&adventure=8318638903
-If the reservation is successful, it flips the "available" key to "false" and "reserved" key to "true" for the given adventure
-*/
 app.post("/reservations/new", (req, res) => {
   const reservation = req.body;
   if (! (reservation.name && reservation.date && reservation.person && reservation.adventure)) {
@@ -143,44 +119,11 @@ app.post("/reservations/new", (req, res) => {
   }
 });
 
-/*
-[POST] API used in reservations.html page to fetch all reservations
-The response is an [array] of reservations with each having the following structure :
-{
-    "name": "Rahul",
-    "date": "2020-10-26",
-    "person": "02",
-    "adventure": "2447910730",
-    "adventureName": "Niaboytown",
-    "price": 8006,
-    "id": "34b2076696d4e51a",
-    "time": "Sun Oct 25 2020 19:32:12 GMT+0530 (India Standard Time)"
-}
-Data is sourced from "reservations" array in db.json file
-*/
 app.get("/reservations", (req, res) => {
   const data = db.get("reservations").value();
   if (data) return res.json(data);
 });
 
-/*
-[POST] API used to insert a randomly generated adventure to a city
-The input is of the format
-{
-    "city": "bangkok"
-}
-The response is a randomly generated adventure inserted to given city
-{
-    "success": true,
-    "id": "3409781073",
-    "name": "Mereceville",
-    "costPerHead": 823,
-    "currency": "INR",
-    "image": "https://images.pexels.com/photos/837745/pexels-photo-837745.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-    "duration": 18,
-    "category": "Cycling"
-}
-*/
 app.post("/adventures/new", (req, res) => {
   let categories = ["Beaches", "Cycling", "Hillside", "Party"];
   let places = random_data.places;
